@@ -3,7 +3,7 @@ import Link from 'next/link'
 import {
   Table,
   TableBody,
-  TableCaption,
+  // TableCaption,
   TableCell,
   TableHead,
   TableHeader,

@@ -2,7 +2,7 @@ import React from 'react'
 import CompanionCard from '@/components/CompanionCard'
 import CompanionList from '../components/CompanionList'
 import Cta from '../components/CTA'
-import { recentSessions } from '../constants'
+// import { recentSessions } from '../constants'
 import { getAllCompanions, getRecentSessions } from '../lib/actions/companion.actions'
 import { getSubjectColor } from '../lib/utils'
 

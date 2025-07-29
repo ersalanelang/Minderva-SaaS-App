@@ -4,13 +4,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { cn } from "../lib/utils"
 import { usePathname } from "next/navigation"
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useTheme } from "next-themes"
 import ThemeToggleButton from './Theme-Toggle-Button'
-import { Button } from './ui/button'
 import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
-import { Home, Users, BookOpen, User } from 'lucide-react'
+
 
 const navItems = [
     { label:'Home', href:'/'},
@@ -25,10 +24,10 @@ const Navbar = () => {
   const backgroundRef = useRef<HTMLDivElement>(null);
 
   // Set background position for active page
-  const setActivePosition = () => {
+  const setActivePosition = useCallback(() => {
     const activeIndex = navItems.findIndex(item => item.href === pathname);
     if (activeIndex !== -1 && navLinksRef.current && backgroundRef.current) {
-      const activeElement = navLinksRef.current.children[activeIndex + 1] as HTMLElement; // +1 because of background div
+      const activeElement = navLinksRef.current.children[activeIndex + 1] as HTMLElement;
       if (activeElement) {
         const rect = activeElement.getBoundingClientRect();
         const parentRect = navLinksRef.current.getBoundingClientRect();
@@ -51,12 +50,11 @@ const Navbar = () => {
         ease: "power2.out",
       });
     }
-  };
+  }, [pathname]);
 
-  // Set active position on mount and pathname change
   useEffect(() => {
     setTimeout(setActivePosition, 100); // Small delay to ensure DOM is ready
-  }, [pathname]);
+  }, [pathname, setActivePosition]);
 
   // Handle mouse enter on navigation items
   const handleMouseEnter = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {

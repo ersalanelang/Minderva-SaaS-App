@@ -32,8 +32,9 @@ const SearchInput = () => {
             router.push(newUrl, { scroll: false });
         }
       }
-    }, 500)
-  }, [searchQuery, router, searchParams, pathname]);
+    }, 500);
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchQuery, router, query, searchParams, pathname]);
 
   return (
     <div className="relative border border-black rounded-lg items-center flex gap-2 px-2 py-1 h-fit">
