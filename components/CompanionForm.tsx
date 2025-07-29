@@ -37,9 +37,7 @@ const formSchema = z.object({
 })  
 
 const CompanionForm = () => {
-    type FormSchemaType = z.infer<typeof formSchema>;
-
-    const form = useForm<FormSchemaType>({
+    const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: '',
