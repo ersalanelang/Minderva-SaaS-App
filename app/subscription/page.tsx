@@ -1,6 +1,11 @@
 import {PricingTable} from '@clerk/nextjs'
+import {auth} from "@clerk/nextjs/server";
+import { redirect } from 'next/navigation';
 
-const Subcription = () => {
+const Subcription = async ()  => {
+  const { userId } = await auth();
+  if(!userId) redirect('/sign-in');
+
   return (
       <PricingTable />
   )

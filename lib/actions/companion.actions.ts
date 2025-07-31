@@ -18,10 +18,17 @@ export const createCompanion = async (formData: CreateCompanion) => {
     return data[0];
 }
 
-export const getAllCompanions = async ({ limit = 10, page = 1, subject, topic }: GetAllCompanions) => {
+export const getAllCompanions = async ({ limit = 10, page = 1, subject, topic, userId }: GetAllCompanions) => {
+    const { userId: currentUserId } = await auth();
     const supabase = createSupabaseClient();
 
+    // Filter berdasarkan user_id jika userId disediakan
     let query = supabase.from('companions').select();
+
+    // KUNCI: Filter berdasarkan author jika userId disediakan
+    if (userId) {
+        query = query.eq('author', userId);
+    }
 
     if(subject && topic) {
         query = query.ilike('subject', `%${subject}%`)
@@ -37,9 +44,37 @@ export const getAllCompanions = async ({ limit = 10, page = 1, subject, topic }:
     const { data: companions, error } = await query;
 
     if(error) throw new Error(error.message);
+    if (!companions || companions.length === 0) {
+        return [];
+    }
 
-    return companions;
-}
+    // Jika tidak ada user yang login, return companions tanpa bookmark status
+    if (!currentUserId) {
+        return companions.map(companion => ({
+            ...companion,
+            bookmarked: false
+        }));
+    }
+
+    // Query bookmarks untuk user saat ini
+    const companionIds = companions.map(c => c.id);
+    const { data: bookmarks } = await supabase
+        .from('bookmarks')
+        .select('companion_id')
+        .eq('user_id', currentUserId)
+        .in('companion_id', companionIds);
+
+    // Set bookmark IDs untuk lookup cepat
+    const bookmarkedIds = new Set(bookmarks?.map(b => b.companion_id) || []);
+
+    // Transform data untuk menambahkan field bookmarked
+    const companionsWithBookmarks = companions.map(companion => ({
+        ...companion,
+        bookmarked: bookmarkedIds.has(companion.id)
+    }));
+
+    return companionsWithBookmarks;
+};
 
 export const getCompanion = async (id: string) => {
     const supabase = createSupabaseClient();
@@ -58,15 +93,38 @@ export const getCompanion = async (id: string) => {
 export const addToSessionHistory = async (companionId: string) => {
     const { userId } = await auth();
     const supabase = createSupabaseClient();
-    const { data, error } = await supabase.from('session_history')
-        .insert({
-            companion_id: companionId,
-            user_id: userId,
-        })
+    
+    // Check if session already exists
+    const { data: existingSession } = await supabase
+        .from('session_history')
+        .select('id')
+        .eq('companion_id', companionId)
+        .eq('user_id', userId)
+        .single();
 
-    if(error) throw new Error(error.message);
+    if (existingSession) {
+        // Update existing session timestamp
+        const { data, error } = await supabase
+            .from('session_history')
+            .update({ created_at: new Date().toISOString() })
+            .eq('id', existingSession.id)
+            .select();
+            
+        if(error) throw new Error(error.message);
+        return data;
+    } else {
+        // Insert new session
+        const { data, error } = await supabase
+            .from('session_history')
+            .insert({
+                companion_id: companionId,
+                user_id: userId,
+            })
+            .select();
 
-    return data;
+        if(error) throw new Error(error.message);
+        return data;
+    }
 }
 
 export const getRecentSessions = async (limit = 10) => {
@@ -143,45 +201,74 @@ export const newCompanionPermissions = async () => {
 export const addBookmark = async (companionId: string, path: string) => {
   const { userId } = await auth();
   if (!userId) return;
+  
   const supabase = createSupabaseClient();
-  const { data, error } = await supabase.from("bookmarks").insert({
-    companion_id: companionId,
-    user_id: userId,
-  });
+  
+  // Cek apakah bookmark sudah ada untuk mencegah duplikasi
+  const { data: existingBookmark } = await supabase
+    .from("bookmarks")
+    .select("id")
+    .eq("companion_id", companionId)
+    .eq("user_id", userId)
+    .single();
+
+  if (existingBookmark) {
+    // Bookmark sudah ada, tidak perlu menambah lagi
+    revalidatePath(path);
+    return existingBookmark;
+  }
+
+  const { data, error } = await supabase
+    .from("bookmarks")
+    .insert({
+      companion_id: companionId,
+      user_id: userId,
+    })
+    .select();
+
   if (error) {
     throw new Error(error.message);
   }
-  // Revalidate the path to force a re-render of the page
+
   revalidatePath(path);
-  return data;
+  return data[0];
 };
 
 export const removeBookmark = async (companionId: string, path: string) => {
   const { userId } = await auth();
   if (!userId) return;
+  
   const supabase = createSupabaseClient();
   const { data, error } = await supabase
     .from("bookmarks")
     .delete()
     .eq("companion_id", companionId)
     .eq("user_id", userId);
+    
   if (error) {
     throw new Error(error.message);
   }
+  
   revalidatePath(path);
   return data;
 };
 
-// It's almost the same as getUserCompanions, but it's for the bookmarked companions
 export const getBookmarkedCompanions = async (userId: string) => {
   const supabase = createSupabaseClient();
   const { data, error } = await supabase
     .from("bookmarks")
-    .select(`companions:companion_id (*)`) // Notice the (*) to get all the companion data
+    .select(`companions:companion_id (*)`)
     .eq("user_id", userId);
+    
   if (error) {
     throw new Error(error.message);
   }
-  // We don't need the bookmarks data, so we return only the companions
-  return data.map(({ companions }) => companions);
+  
+  // Transform data dan tambahkan bookmarked: true (karena semua sudah pasti bookmarked)
+  const companions = data?.map(({ companions }) => ({
+    ...companions,
+    bookmarked: true
+  })) || [];
+
+  return companions;
 };

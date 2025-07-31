@@ -10,7 +10,7 @@ const socialLinks = [
 
 const Footer = () => {
   return (
-    <footer className="w-screen mt-20 bg-red-50 py-3 text-black">
+    <footer className="w-screen mt-20 bg-red-50 py-8 text-black">
       <div className="container mx-auto flex flex-col items-center gap-4 px-4">
         {/* Social Links - Di atas */}
         <div className="flex justify-center gap-4">

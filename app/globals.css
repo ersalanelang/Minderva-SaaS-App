@@ -6,6 +6,7 @@
 
 :root {
   --primary: #fe5933;
+  --primary-hover: #eb3e17;
   --background: #f9f9f9;
   --foreground: oklch(0.145 0 0);
   --cta: #2c2c2c;
@@ -45,6 +46,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
   --color-cta: var(--cta);
   --color-cta-gold: var(--cta-gold);
   --font-sans: var(--font-geist-sans);
@@ -130,7 +132,7 @@ body {
     @apply bg-background text-foreground;
   }
   main {
-    @apply mx-auto px-14 flex flex-col gap-8 bg-background h-full max-w-[1400px] pt-10 mb-5 max-sm:px-2;
+    @apply flex flex-col gap-8 bg-background h-full max-w-[1400px] px-14 pt-5 mb-5 max-sm:px-2;
   }
   h1 {
     @apply text-3xl font-bold;
@@ -139,10 +141,11 @@ body {
 
 @layer components {
   .home-section {
-    @apply flex gap-4 justify-between items-start w-full max-lg:flex-col-reverse max-lg:items-center;
+    @apply flex gap-4 justify-start items-start w-full max-lg:flex-col-reverse max-lg:items-center;
   }
+  /* Or update existing classes */
   .companions-grid {
-    @apply flex flex-wrap gap-4 w-full max-md:justify-center justify-between;
+    @apply grid grid-cols-3 gap-4 w-full justify-start mt-4 max-md:grid-cols-1 max-md:justify-center;
   }
   .companion-card {
     @apply flex flex-col rounded-4xl border border-black px-4 py-4 gap-5 w-full min-lg:max-w-[410px] justify-between;
@@ -166,7 +169,7 @@ body {
     @apply bg-cta-gold rounded-4xl px-3 py-1.5 text-black;
   }
   .btn-primary {
-    @apply bg-primary text-white rounded-xl cursor-pointer px-4 py-2 flex items-center gap-2 ;
+    @apply bg-primary hover:bg-primary-hover text-white rounded-xl cursor-pointer px-4 py-2 flex items-center gap-2 ;
   }
   .navbar {
     @apply flex items-center justify-between mx-auto w-full px-14 py-4 bg-white relative max-sm:px-4 dark:bg-background dark:text-white;
@@ -233,6 +236,23 @@ body {
   }
   .animate-fadeInUp {
     animation: fadeInUp 0.5s ease-out forwards;
+  }
+
+  .empty-state-card {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    border: 2px dashed #cbd5e1;
+    border-radius: 12px;
+    min-height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    width: 100%
+  }
+
+  .empty-state-card:hover {
+    border-color: #94a3b8;
+    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
   }
 
   .btn-signin {

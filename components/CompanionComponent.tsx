@@ -92,7 +92,7 @@ const CompanionComponent = ({companionId, subject, topic, name, userName, userIm
   }
 
   return (
-    <section className="flex flex-col h-[70vh]">
+    <section className="flex flex-col h-[140vh]">
       <section className="flex gap-8 max-sm:flex-col">
         <div className="companion-section">
           <div 

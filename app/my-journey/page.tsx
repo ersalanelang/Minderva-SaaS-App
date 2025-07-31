@@ -20,8 +20,8 @@ const ProfilePage = async () => {
   const bookmarkedCompanions = await getBookmarkedCompanions(user.id);
 
   return (
-    <main className="min-lg:w-3/4">
-      <section className="flex justify-between gap-4 max-sm:flex-col items-center">
+    <main className="container mx-auto w-full md:w-3/4 max-w-6xl px-4">
+      <section className="flex justify-between gap-4 max-md:flex-col items-center">
         <div className="flex gap-4 items-center">
           <Image 
             src={user.imageUrl}
