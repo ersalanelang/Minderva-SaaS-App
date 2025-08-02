@@ -58,23 +58,12 @@ const Page = async () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
-            <SignedOut>
-              <SignInButton>
-                <button className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-lg font-semibold rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
-                  Create Your Companion
-                </button>
-              </SignInButton>
-            </SignedOut>
-
-            <SignedIn>
-              <Link 
-                href="/home"
-                className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-lg font-semibold rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-              >
-                Go to Dashboard
-              </Link>
-            </SignedIn>
-            
+            <Link
+              href="/sign-in"
+              className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-lg font-semibold rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+            >
+              Create Your Companion
+            </Link> 
             <button className="flex items-center gap-3 px-8 py-4 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-2 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white text-lg font-medium rounded-xl transition-all duration-200 hover:border-blue-300 dark:hover:border-blue-600">
               <Play className="w-5 h-5" />
               Watch Demo
@@ -369,23 +358,14 @@ const Page = async () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <SignedOut>
-                <SignInButton>
-                  <button className="px-8 py-4 bg-white text-blue-600 text-lg font-semibold rounded-xl hover:bg-gray-100 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
-                    Create Your First Companion
-                  </button>
-                </SignInButton>
-              </SignedOut>
-
-              <SignedIn>
+              
                 <Link 
-                  href="/home"
+                  href="/sign-in"
                   className="inline-block px-8 py-4 bg-white text-blue-600 text-lg font-semibold rounded-xl hover:bg-gray-100 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                 >
-                  Go to Dashboard
+                  Create Your First Companion
                 </Link>
-              </SignedIn>
-
+          
               <div className="flex items-center gap-2 text-white/80">
                 <span>✨</span>
                 <span className="text-sm">Free to start • No credit card required</span>
