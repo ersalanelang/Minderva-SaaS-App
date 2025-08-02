@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { ClerkProvider } from '@clerk/nextjs'
+import { ClerkProviderWrapper } from "@/components/ClerkProviderWrapper";
 // import { Geist, Geist_Mono } from 'next/font/google'
 import { Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { ThemeProvider } from "@/components/Theme"
+import { ThemeProvider } from "@/components/Theme";
+
 
 // const geistSans = Geist({
 //   variable: '--font-geist-sans',
@@ -34,22 +35,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${bricolage.variable} antialiased`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem={true} 
-          disableTransitionOnChange
-        >
-          <ClerkProvider appearance={{ variables: { colorPrimary: '#fe5933' }} }>
+      <body>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+          <ClerkProviderWrapper>
             <div className="min-h-screen">
               <Navbar />
-              <main>
-                {children}
-              </main>
+              <main>{children}</main>
               <Footer />
             </div>
-          </ClerkProvider>
+          </ClerkProviderWrapper>
         </ThemeProvider>
       </body>
     </html>

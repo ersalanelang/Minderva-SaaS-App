@@ -7,7 +7,9 @@ const Subcription = async ()  => {
   if(!userId) redirect('/sign-in');
 
   return (
+    <div className="main-layout" >
       <PricingTable />
+      </div>
   )
 }
 

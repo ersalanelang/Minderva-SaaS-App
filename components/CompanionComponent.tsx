@@ -93,7 +93,7 @@ const CompanionComponent = ({companionId, subject, topic, name, userName, userIm
 
   return (
     <section className="flex flex-col h-[140vh]">
-      <section className="flex gap-8 max-sm:flex-col">
+      <section className="flex gap-8 max-sm:flex-col ">
         <div className="companion-section">
           <div 
             className="companion-avatar" 
@@ -135,7 +135,8 @@ const CompanionComponent = ({companionId, subject, topic, name, userName, userIm
               </p>
           </div>
           <button className="btn-mic" onClick={toggleMicrophone} disabled={callStatus !== CallStatus.ACTIVE}>
-              <Image src={isMuted ? '/icons/mic-off.svg' : '/icons/mic-on.svg'} alt="mic" width={36} height={36} />
+              <Image src={isMuted ? '/icons/mic-off.svg' : '/icons/mic-on.svg'} alt="mic" width={36} height={36} className="block dark:hidden"/>
+              <Image src={isMuted ? '/icons/mic-off-dark.svg' : '/icons/mic-on-dark.svg'} alt="mic dark" width={36} height={36} className="hidden dark:block"/>
               <p className="max-sm:hidden">
                   {isMuted ? 'Turn on microphone' : 'Turn off microphone'}
               </p>

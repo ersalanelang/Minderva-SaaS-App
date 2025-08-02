@@ -20,8 +20,8 @@ const CompanionSession = async ({params}:CompanionSessionPageProps) => {
   if(!name) redirect('/companions');
 
   return (
-    <main>
-      <article className="flex rounded-border justify-between p-6 max-md:flex-col">
+    <main className="main-layout">
+      <article className=" flex rounded-border justify-between p-6 max-md:flex-col border-black dark:border-white">
         <div className="flex items-center gap-2">
           <div 
             className="size-[72px] flex items-center justify-center rounded-lg max-md:hidden"

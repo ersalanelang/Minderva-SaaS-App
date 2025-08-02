@@ -10,7 +10,7 @@ const socialLinks = [
 
 const Footer = () => {
   return (
-    <footer className="w-screen mt-20 bg-red-50 py-8 text-black">
+    <footer className="w-screen bg-background2 py-8 ">
       <div className="container mx-auto flex flex-col items-center gap-4 px-4">
         {/* Social Links - Di atas */}
         <div className="flex justify-center gap-4">
@@ -20,7 +20,7 @@ const Footer = () => {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-black transition-colors duration-500 ease-in-out hover:text-white text-xl"
+              className="text-black hover:text-gray-500 dark:hover:text-gray-500 text-black dark:text-white text-xl transition-colors duration-500 ease-in-out"
             >
               {link.icon}
             </a>
@@ -28,14 +28,14 @@ const Footer = () => {
         </div>
 
         {/* Copyright Text - Di tengah */}
-        <p className="text-center text-sm font-light">
+        <p className="text-center text-sm font-light text-black dark:text-white">
           © 2025 Ersalan Elang Kusuma
         </p>
 
         {/* Privacy Policy - Di bawah */}
         <a
           href="#privacy-policy"
-          className="text-center text-sm font-light hover:underline"
+          className="text-center text-sm font-light hover:underline text-black dark:text-white"
         >
           Privacy Policy
         </a>

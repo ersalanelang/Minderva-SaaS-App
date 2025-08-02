@@ -25,7 +25,7 @@ const Page = async () => {
     const recentSessionsCompanions = await getRecentSessions(10);
 
     return (
-        <main>
+        <main className="main-layout">
             <h1>My Companions</h1>
 
             <section className="home-section">

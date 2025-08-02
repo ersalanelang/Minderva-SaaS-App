@@ -17,7 +17,7 @@ const CompanionsLibrary = async ({ searchParams }: SearchParams) => {
     const companions = await getAllCompanions({ subject, topic, userId: user.id});
 
     return (
-        <main>
+        <main className="main-layout">
             <section className="">
                 <h1 className="pb-3">Companion Library</h1>
                 <div className="flex gap-4 items-center max-md:gap-1">
@@ -29,7 +29,7 @@ const CompanionsLibrary = async ({ searchParams }: SearchParams) => {
                         <SubjectFilter />
                     </div>
                     <Link href="/companions/new">
-                    <button className="btn-primary font-semibold h-10 px-3 py-2 whitespace-nowrap">
+                    <button className="btn-primary font-semibold h-10 px-3 py-2 whitespace-nowrap dark:border-white/30">
                         <span>Add</span>
                         <span className="text-lg leading-none ml-1">+</span>
                     </button>

@@ -37,12 +37,21 @@ const SearchInput = () => {
   }, [searchQuery, router, query, searchParams, pathname]);
 
   return (
-    <div className="border border-black rounded-lg items-center flex gap-2 px-3 py-2 h-10 w-full">
+    <div className="border border-black rounded-lg items-center flex gap-2 px-3 py-2 h-10 w-full dark:border-white/30">
       <Image 
         src="/icons/search.svg"
-        alt="seacrh"
+        alt="search"
         width={15}
         height={15}
+        className="block dark:hidden"
+      />
+      {/* Dark mode icon */}
+      <Image 
+        src="/icons/search-dark.svg"
+        alt="search dark"
+        width={15}
+        height={15}
+        className="hidden dark:block"
       />
         <Input
           placeholder="search companions..."

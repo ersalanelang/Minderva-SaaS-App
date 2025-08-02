@@ -20,7 +20,7 @@ const ProfilePage = async () => {
   const bookmarkedCompanions = await getBookmarkedCompanions(user.id);
 
   return (
-    <main className="container mx-auto w-full md:w-3/4 max-w-6xl px-4">
+    <main className="main-layout container mx-auto w-full md:w-3/4 max-w-6xl px-4">
       <section className="flex justify-between gap-4 max-md:flex-col items-center">
         <div className="flex gap-4 items-center">
           <Image 
