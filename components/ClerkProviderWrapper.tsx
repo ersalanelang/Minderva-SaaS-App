@@ -19,7 +19,6 @@ export function ClerkProviderWrapper({ children }: { children: React.ReactNode }
       appearance={{
         baseTheme: resolvedTheme === 'dark' ? dark : undefined,
         variables: { colorPrimary: '#fe5933' },
-        signIn: { baseTheme: neobrutalism }
       }}
     >
       {children}

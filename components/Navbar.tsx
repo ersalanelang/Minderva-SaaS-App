@@ -9,6 +9,7 @@ import gsap from "gsap";
 import { useTheme } from "next-themes"
 import ThemeToggleButton from './Theme-Toggle-Button'
 import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import { FaHome,FaRobot, FaRegUserCircle } from "react-icons/fa";
 
 const navItems = [
     { label:'Home', href:'/home'},
@@ -114,7 +115,7 @@ const Navbar = () => {
       <nav className="navbar">
         {/* Logo */}
         {isLandingPage ? (
-          // No link for landing page
+          <Link href="/" className="flex-shrink-0">
           <div className="flex-shrink-0">
             <Image 
               src={logoSrc}
@@ -125,6 +126,7 @@ const Navbar = () => {
               priority
             />
           </div>
+          </Link>
         ) : (
           // With link for other pages
           <Link href="/home" className="flex-shrink-0">
@@ -196,7 +198,7 @@ const Navbar = () => {
           {isLandingPage && (
             <SignedOut>
               <SignInButton>
-                <button className="px-6 py-2 bg-black dark:bg-white text-white dark:text-black font-medium rounded-lg hover:bg-gray-800 dark:hover:bg-gray-100 transition-all duration-200">
+                <button className="px-3 py-2 bg-black cursor-pointer dark:bg-white text-sm text-white dark:text-black font-medium rounded-lg hover:bg-gray-800 dark:hover:bg-gray-100 transition-all duration-200">
                   Sign In
                 </button>
               </SignInButton>
@@ -229,17 +231,17 @@ const Navbar = () => {
                   <UserButton.Link 
                     label="Home"
                     href="/home"
-                    labelIcon={<span className="text-base">🏠</span>}
+                    labelIcon={<span className="text-base"><FaHome /></span>}
                   />
                   <UserButton.Link 
                     label="Companions"
                     href="/companions"
-                    labelIcon={<span className="text-base">👥</span>}
+                    labelIcon={<span className="text-base"><FaRobot /></span>}
                   />
                   <UserButton.Link 
                     label="My Journey"
                     href="/my-journey"
-                    labelIcon={<span className="text-base">📚</span>}
+                    labelIcon={<span className="text-base"><FaRegUserCircle /></span>}
                   />
                   
                   {/* Clerk will automatically add separator and account options */}
@@ -248,7 +250,7 @@ const Navbar = () => {
             </SignedIn>
           )}
           
-          {/* For Non-Signed In Users: Simple Sign In Button */}
+          {/* For Non-Signed In Users phone: Simple Sign In Button */}
           <SignedOut>
             <SignInButton>
               <button className="flex items-center gap-2 px-4 py-2 border border-input bg-background rounded-md text-sm font-medium">

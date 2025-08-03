@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { SignInButton, SignedIn, SignedOut} from '@clerk/nextjs'
+// import { SignInButton, SignedIn, SignedOut} from '@clerk/nextjs'
 import { currentUser } from "@clerk/nextjs/server";
 import { ArrowRight, Mic, Volume2, Users, Sparkles, Settings, Play, MessageSquare, Brain, Heart } from 'lucide-react'
 import { redirect } from 'next/navigation'
@@ -161,7 +161,6 @@ const Page = async () => {
               <div className="aspect-video rounded-2xl overflow-hidden border-2 border-dashed border-blue-300 dark:border-blue-700">
                 <video
                   className="w-full h-full object-cover"
-                  autoPlay
                   loop
                   muted
                   playsInline
@@ -298,8 +297,8 @@ const Page = async () => {
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold">S</div>
               <div>
-                <p className="font-semibold text-gray-900 dark:text-white">Sarah Chen</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">Math Student</p>
+                <p className="font-semibold text-gray-900 dark:text-white">Agil Adi Saputro</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">Informatics Student</p>
               </div>
             </div>
           </div>
@@ -318,8 +317,8 @@ const Page = async () => {
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold">M</div>
               <div>
-                <p className="font-semibold text-gray-900 dark:text-white">Mike Johnson</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">Language Learner</p>
+                <p className="font-semibold text-gray-900 dark:text-white">Syahrindra Dzaki</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">Job Hunter</p>
               </div>
             </div>
           </div>
@@ -333,13 +332,13 @@ const Page = async () => {
               ))}
             </div>
             <p className="text-gray-600 dark:text-gray-300 mb-4">
-              "The personality customization is amazing! My history companion 'Professor Wilson' has such an engaging teaching style that makes learning fun."
+              "The personality customization is amazing! My history companion 'Professor Wilis' has such an engaging teaching style that makes learning fun."
             </p>
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center text-white font-bold">L</div>
               <div>
-                <p className="font-semibold text-gray-900 dark:text-white">Lisa Park</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">History Student</p>
+                <p className="font-semibold text-gray-900 dark:text-white">Yerry Adhiyasa</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">Informatics Ungraduate</p>
               </div>
             </div>
           </div>
