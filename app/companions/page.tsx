@@ -13,7 +13,7 @@ const CompanionsLibrary = async ({ searchParams }: SearchParams) => {
     const topic = filters.topic ? filters.topic : '';
 
     const user = await currentUser()
-    if (!user) {redirect('/')}
+    if (!user) {redirect('/sign-in')}
     const companions = await getAllCompanions({ subject, topic, userId: user.id});
 
     return (
